@@ -34,17 +34,17 @@ function makeBoard() {
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
 
-  let htmlBoard = document.getElementById("board");
+  // creating the top row could be its own function: createTopRow()
+  const htmlBoard = document.getElementById("board");
 
-  // TODO: create top row tr that houses individual gameplay buttons
-  let top = document.createElement("tr");
+  // TODO: create top row <tr> container and add eventlistener
+  const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
-  // TODO: create individual row position cells and assign to top row
-
-  for (var x = 0; x < WIDTH; x++) {
-    let headCell = document.createElement("td");
+  // TODO: create individual cells at top of columns with ids corresponding to column index
+  for (let x = 0; x < WIDTH; x++) {
+    const headCell = document.createElement("td");
     headCell.setAttribute("id", x);
     top.append(headCell);
   }
@@ -53,13 +53,13 @@ function makeHtmlBoard() {
   // dynamically creates the main part of html board
   // uses HEIGHT to create table rows
   // uses WIDTH to create table cells for each row
-  for (var y = 0; y < HEIGHT; y++) {
+  for (let y = 0; y < HEIGHT; y++) {
     // TODO: Create a table row element and assign to a "row" variable
-    let row = document.createElement("tr");
+    const row = document.createElement("tr");
 
-    for (var x = 0; x < WIDTH; x++) {
+    for (let x = 0; x < WIDTH; x++) {
       // TODO: Create a table cell element and assign to a "cell" variable
-      let cell = document.createElement("td");
+      const cell = document.createElement("td");
 
       // TODO: add an id, y-x, to the above table cell element
       cell.setAttribute("id", `${y}-${x}`);
