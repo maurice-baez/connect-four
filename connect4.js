@@ -24,7 +24,6 @@ function makeBoard() {
       board[y][x] = null;
     }
   }
-  console.log("board=", board);
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
@@ -101,6 +100,8 @@ function handleClick(evt) {
 
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
+  board[y][x] = currPlayer;
+  console.log(board);
   placeInTable(y, x);
 
   // check for win
@@ -111,17 +112,7 @@ function handleClick(evt) {
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
 
-  let boardFilled = true;
-
-  for (let y = 0; y < HEIGHT; y++) {
-    if (board[y].some((cell) => cell === null)) {
-      boardFilled = false;
-      break;
-    }
-  }
-
-  // boardFilled is true or false
-  if (boardFilled) {
+  if (board[0].every((cell) => cell !== null)) {
     endGame();
   }
 
