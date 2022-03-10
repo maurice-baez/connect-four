@@ -86,7 +86,8 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  alert(msg)
+  setTimeout(function() {
+    alert(msg)},100)
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -134,8 +135,6 @@ function checkForWin() {
    */
 
   function _win(cells) {
-    // TODO: Check four cells to see if they're all legal & all color of current
-    // player
 
 
     //better solution for _win()
