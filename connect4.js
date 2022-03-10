@@ -65,9 +65,13 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return bottom empty y (null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 5
 
-  return 5;
+  for(let y = HEIGHT - 1; y >= 0; y--){
+    if(board[y][x] === null){
+      return y;
+    }
+  }
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -94,6 +98,7 @@ function handleClick(evt) {
 
   // get next spot in column (if none, ignore click)
   var y = findSpotForCol(x);
+
   if (y === null) {
     return;
   }
