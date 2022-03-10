@@ -18,7 +18,6 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
-
   for (let y = 0; y < HEIGHT; y++) {
     board[y] = [];
     for (let x = 0; x < WIDTH; x++) {
@@ -69,15 +68,14 @@ function makeHtmlBoard() {
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 5
 
-    return 5;
+  return 5;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-
   const piece = document.createElement("div");
-  piece.classList.add("piece" , `p${currPlayer}`);
+  piece.classList.add("piece", `p${currPlayer}`);
 
   const currCell = document.getElementById(`${y}-${x}`);
   currCell.append(piece);
@@ -114,7 +112,11 @@ function handleClick(evt) {
   // TODO: check if all cells in board are filled; if so call, call endGame
 
   // switch players
-  // TODO: switch currPlayer 1 <-> 2
+  if (currPlayer === 1) {
+    currPlayer = 2;
+  } else {
+    currPlayer = 1;
+  }
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
