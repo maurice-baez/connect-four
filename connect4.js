@@ -86,7 +86,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
+  alert(msg)
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -102,8 +102,6 @@ function handleClick(evt) {
     return;
   }
 
-  // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
   board[y][x] = currPlayer;
   console.log(board);
   placeInTable(y, x);
@@ -113,11 +111,9 @@ function handleClick(evt) {
     return endGame(`Player ${currPlayer} won!`);
   }
 
-  // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
 
   if (board[0].every((cell) => cell !== null)) {
-    endGame();
+    endGame("It's a tie");
   }
 
   // switch players
@@ -140,16 +136,62 @@ function checkForWin() {
   function _win(cells) {
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
-    let legalMoves = false;
-    let samePlayer = false;
 
-    for (let i = 0; i < cells.length; i++) {
-      if (cells[i][0] < HEIGHT && cells[i][1] >= 0 && cells[i][1] < WIDTH) {
-        legalMoves = true;
+
+    //better solution for _win()
+
+  //   return cells.every(
+  //     ([y, x]) =>
+  //       y >= 0 &&
+  //       y < HEIGHT &&
+  //       x >= 0 &&
+  //       x < WIDTH &&
+  //       board[y][x] === currPlayer
+  //   );
+  // }
+
+    function legalMoves(cells) {
+
+      for (let i = 0; i < cells.length; i++) {
+        if (cells[i][0] > HEIGHT - 1 || cells[i][1] > WIDTH || cells[i][1] < 0) {
+          return false;
+        }
       }
+      return true;
     }
 
+    function sameColors(cells) {
+
+      return cells.every(([y,x]) =>  board[y][x] === currPlayer);
+
+      // let player = [];
+
+      // for(let i = 0; i < cells.length; i++){
+
+
+      //   player.push(board[cells[i][0]][cells[i][1]]);
+      // }
+
+      // //  cells[i][0] cells[i][1]
+
+      // return(player.every(num => num === player[0]));
+    }
+
+    return (legalMoves(cells) && sameColors(cells));
+  }
+    // let legalMoves = false;
+
+    // for (let i = 0; i < cells.length; i++) {
+    //   if (cells[i][0] < HEIGHT && cells[i][1] >= 0 && cells[i][1] < WIDTH) {
+    //     continue;
+    //   }
+    //   legalMoves = true;
+    // }
+
+
+
     // let players = cells.map((cell) => board[cell[0]][cell[1]]);
+
     // if (players.every((player) => player === 1) || players.every((player) => player === 2)) {
     //   samePlayer = true;
     // }
@@ -159,7 +201,7 @@ function checkForWin() {
     // } else {
     //   return false;
     // }
-  }
+
 
   // using HEIGHT and WIDTH, generate "check list" of coordinates
   // for 4 cells (starting here) for each of the different
