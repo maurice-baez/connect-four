@@ -65,9 +65,8 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return bottom empty y (null if filled) */
 
 function findSpotForCol(x) {
-
-  for(let y = HEIGHT - 1; y >= 0; y--){
-    if(board[y][x] === null){
+  for (let y = HEIGHT - 1; y >= 0; y--) {
+    if (board[y][x] === null) {
       return y;
     }
   }
@@ -94,10 +93,10 @@ function endGame(msg) {
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
+  let x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
+  let y = findSpotForCol(x);
 
   if (y === null) {
     return;
@@ -138,27 +137,35 @@ function checkForWin() {
    * currPlayer
    */
 
-
-
-
-
-
-
   function _win(cells) {
     // TODO: Check four cells to see if they're all legal & all color of current
-    // playe
+    // player
+    let legalMoves = false;
+    let samePlayer = false;
 
+    for (let i = 0; i < cells.length; i++) {
+      if (cells[i][0] < HEIGHT && cells[i][1] >= 0 && cells[i][1] < WIDTH) {
+        legalMoves = true;
+      }
+    }
 
+    // let players = cells.map((cell) => board[cell[0]][cell[1]]);
+    // if (players.every((player) => player === 1) || players.every((player) => player === 2)) {
+    //   samePlayer = true;
+    // }
 
-
+    // if (legalMoves && samePlayer) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   // using HEIGHT and WIDTH, generate "check list" of coordinates
   // for 4 cells (starting here) for each of the different
   // ways to win: horizontal, vertical, diagonalDR, diagonalDL
-  for (var y = 0; y < HEIGHT; y++) {
-    for (var x = 0; x < WIDTH; x++) {
-
+  for (let y = 0; y < HEIGHT; y++) {
+    for (let x = 0; x < WIDTH; x++) {
       let horiz = [
         [y, x],
         [y, x + 1],
@@ -173,15 +180,15 @@ function checkForWin() {
       ];
       let diagDL = [
         [y, x],
-        [y + 1, x - 1]
-        [y + 2, x - 2]
-        [y + 3, x - 3]
+        [y + 1, x - 1],
+        [y + 2, x - 2],
+        [y + 3, x - 3],
       ];
       let diagDR = [
         [y, x],
-        [y + 1, x + 1]
-        [y + 2, x + 2]
-        [y + 3, x + 3]
+        [y + 1, x + 1],
+        [y + 2, x + 2],
+        [y + 3, x + 3],
       ];
 
       // find winner (only checking each win-possibility as needed)
