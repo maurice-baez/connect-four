@@ -111,6 +111,20 @@ function handleClick(evt) {
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
 
+  let boardFilled = true;
+
+  for (let y = 0; y < HEIGHT; y++) {
+    if (board[y].some((cell) => cell === null)) {
+      boardFilled = false;
+      break;
+    }
+  }
+
+  // boardFilled is true or false
+  if (boardFilled) {
+    endGame();
+  }
+
   // switch players
   if (currPlayer === 1) {
     currPlayer = 2;
